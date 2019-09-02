@@ -6,14 +6,14 @@ class GeneticAlgorithm(object):
 
     def __init__(self, pop_size=10, chrom_len=10, g_size=11):
         """
-        :param pop_size:
-        :param chrom_len:
-        :param g_size:
+        :param pop_size: the size of the entire population.
+        :param chrom_len: how many genes are in a chromosome. (eg strand of DNA)
+        :param g_size: how many possibilities are held within each gene. (eg. for human DNA this number would be 3)
         """
         self._POPULATION_SIZE = pop_size
-        self._CHROMOSOME_LENGTH = chrom_len  # how many genes are in each chromosomes.
-        self._GENE_SIZE = g_size  # this controls how many possible variations of each gene there are.
-        self._FINAL_GENERATION = 1  # class is initialized with only one possible generation until evolve is called.
+        self._CHROMOSOME_LENGTH = chrom_len
+        self._GENE_SIZE = g_size
+        self._FINAL_GENERATION = 1
 
         # setting up an initial population.
         self.population = pd.DataFrame(columns=['chromosome', 'fitness'], index=range(0,pop_size))
@@ -22,15 +22,17 @@ class GeneticAlgorithm(object):
             for c in range(chrom_len):
                 temp_gene.append(randrange(g_size))
             self.population['chromosome'][i] = temp_gene
-        self._fitness()
 
-        print(self.population)
+    def __str__(self):
+        return str(self.population)
 
     def _fitness(self):
         for i in range(self._POPULATION_SIZE):
             self.population['fitness'][i] = sum(self.population['chromosome'][i])
+        self.population = self.population.sort_values('fitness', ascending=False)
 
-    def evolve(self, gen):
+    def evolve(self, gen=1):
+        self._fitness()
         self._FINAL_GENERATION = gen
 
     def _mating_pool(self):
