@@ -30,6 +30,7 @@ class GeneticAlgorithm(object):
         for i in range(self._POPULATION_SIZE):
             self.population['fitness'][i] = sum(self.population['chromosome'][i])
         self.population = self.population.sort_values('fitness', ascending=False)
+        self.population = self.population.reset_index(drop=True)
 
     def evolve(self, gen=1):
         self._fitness()
