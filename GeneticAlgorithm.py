@@ -44,8 +44,10 @@ class GeneticAlgorithm(object):
         self.population = self.population.reset_index(drop=True)
 
     def evolve(self, gen=1):
-        self._fitness()
         self._FINAL_GENERATION = gen
+        for i in range(gen):
+            self._fitness()
+            self._mate()
 
     def _mating_pool(self):
         pass
