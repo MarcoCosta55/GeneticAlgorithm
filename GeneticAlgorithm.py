@@ -10,7 +10,7 @@ import pandas as pd
 
 class GeneticAlgorithm(object):
 
-    def __init__(self, pop_size=10, chrom_len=10, g_size=11):
+    def __init__(self, pop_size=100, chrom_len=10, g_size=11):
         """
         Creates a GeneticAlgorithm object and Initializes our first generation population of chromosomes that all have
         randomly generated integer type genes.
@@ -75,7 +75,14 @@ class GeneticAlgorithm(object):
         self._mutate()
 
     def _crossover(self):
-        pass
+        i = 0
+        while i < self._POPULATION_SIZE:
+            cross_pos = randrange(self._CHROMOSOME_LENGTH)
+            temp_chrom1 = self.population['chromosome'][i][cross_pos:] + self.population['chromosome'][i+1][:cross_pos]
+            temp_chrom2 = self.population['chromosome'][i+1][cross_pos:] + self.population['chromosome'][i][:cross_pos]
+            self.population['chromosome'][i] = temp_chrom1
+            self.population['chromosome'][i+1] = temp_chrom2
+            i += 2
 
     def _mutate(self):
         pass
