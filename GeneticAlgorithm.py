@@ -1,3 +1,9 @@
+"""
+A simple implementation of a Genetic Algorithm.
+Copyright (c) 2019 Marco Costa
+"""
+
+
 from random import randrange
 import pandas as pd
 
@@ -6,7 +12,8 @@ class GeneticAlgorithm(object):
 
     def __init__(self, pop_size=10, chrom_len=10, g_size=11):
         """
-        Initializes our first generation population of chromosomes that all have randomly generated integer type genes.
+        Creates a GeneticAlgorithm object and Initializes our first generation population of chromosomes that all have
+        randomly generated integer type genes.
         :param pop_size: the size of the entire population.
         :param chrom_len: how many genes are in a chromosome. (eg strand of DNA)
         :param g_size: how many possibilities are held within each gene. (eg. for human DNA this number would be 3)
@@ -19,6 +26,17 @@ class GeneticAlgorithm(object):
         # initializing our class variable 'population' to be a DataFrame of randomly generated chromosomes
         # and NaN fitness values.
         self.population = pd.DataFrame(columns=['chromosome', 'fitness'], index=range(0,pop_size))
+        self._init_pop(pop_size, chrom_len, g_size)
+
+    def _init_pop(self, pop_size, chrom_len, g_size):
+        """
+        This function is in charge of initializing the first generation with randomly generated chromosomes.
+        When creating application specific child classes, this function should be overridden.
+        :param pop_size:
+        :param chrom_len:
+        :param g_size:
+        :return:
+        """
         for i in range(pop_size):
             temp_gene = []
             for c in range(chrom_len):
