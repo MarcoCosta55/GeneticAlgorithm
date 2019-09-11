@@ -66,7 +66,7 @@ class GeneticAlgorithm(object):
         for i in range(gen):
             self._fitness()
             self._mate()
-
+        self._fitness()
     def _mating_pool(self):
         pass
 
