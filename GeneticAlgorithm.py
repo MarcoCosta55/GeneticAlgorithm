@@ -42,6 +42,7 @@ class GeneticAlgorithm(object):
             for c in range(chrom_len):
                 temp_gene.append(randrange(g_size))
             self.population['chromosome'][i] = temp_gene
+        self.fitness()
 
     def __str__(self):
         """
@@ -64,9 +65,9 @@ class GeneticAlgorithm(object):
     def evolve(self, gen=1):
         self._FINAL_GENERATION = gen
         for i in range(gen):
-            self._fitness()
             self._mate()
-        self._fitness()
+            self._fitness()
+
     def _mating_pool(self):
         pass
 
