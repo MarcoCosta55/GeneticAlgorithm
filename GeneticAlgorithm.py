@@ -42,7 +42,7 @@ class GeneticAlgorithm(object):
             for c in range(chrom_len):
                 temp_gene.append(randrange(g_size))
             self.population['chromosome'][i] = temp_gene
-        self.fitness()
+        self._fitness()
 
     def __str__(self):
         """
