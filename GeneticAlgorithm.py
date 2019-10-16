@@ -54,7 +54,8 @@ class GeneticAlgorithm(object):
     def _fitness(self):
         """
         Simple placeholder fitness function that determines fitness based on the value of the sum of all genes.
-        This function is designed to be overridden by child classes as it really has no practical use.
+        This function is designed to be overridden by child classes as it's main use is just to test and make sure the
+        other functions of the class function as expected.
         """
         for i in range(self._POPULATION_SIZE):
             self.population['fitness'][i] = sum(self.population['chromosome'][i])
@@ -66,7 +67,7 @@ class GeneticAlgorithm(object):
         """
         This function will evolve the entire population to the specified number of generations.
         :param gen: how many generations will the genetic algorithm evolve.
-        :return:
+        :return: none.
         """
         self._FINAL_GENERATION = gen
         for i in range(gen):
@@ -74,13 +75,32 @@ class GeneticAlgorithm(object):
             self._fitness()
 
     def _mating_pool(self):
+        """
+        The purpose of this function is to create a temporary dataframe where a mating pool is chosen from the existing
+        population using a version of natural selection that weighs the chance of being selected based on the
+        chromosomes fitness value. This function is not yet implemented. As it stands now, all members of n population
+        mate in order to make n+1 generation.
+        :return: none.
+        """
         pass
 
     def _mate(self):
+        """
+        This function just calls the functions necessary to evolve each generation. As added functionality is added
+        to the GA's evolution process, this function can added to. Also, child classes can easily override this function
+        if they add functionality to the evolutionary process.
+        :return: none.
+        """
+        self._mating_pool()
         self._crossover()
         self._mutate()
 
     def _crossover(self):
+        """
+        Neighboring chromosomes are chosen to mate. A random spot in the chromosomes is chosen and then the chromosomes
+        exchange DNA at that break point. The resulting two chromosomes are the children for the next generation.
+        :return: none. The population dataframe is directly modified.
+        """
         i = 0
         while i < self._POPULATION_SIZE:
             cross_pos = randrange(self._CHROMOSOME_LENGTH)
@@ -91,8 +111,14 @@ class GeneticAlgorithm(object):
             i += 2
 
     def _mutate(self):
+        """
+        Not yet implemented. A random gene from a random chromosome is mutated once per generation. The chromosome's
+        fitness and place in the population is reevaluated.
+        :return: none. This function will directly modify the population class variable.
+        """
         pass
 
+# The following functions are just simple getters for class variables.
     def get_pop_size(self):
         return self._POPULATION_SIZE
 
