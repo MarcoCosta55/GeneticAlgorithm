@@ -16,7 +16,7 @@ class GeneticAlgorithm(object):
         randomly generated integer type genes.
         :param pop_size: the size of the entire population.
         :param chrom_len: how many genes are in a chromosome. (eg strand of DNA)
-        :param g_size: how many possibilities are held within each gene. (eg. for human DNA this number would be 3)
+        :param g_size: how many possibilities are held within each gene. Value is n-1  (eg. for human DNA this number would be 3)
         """
         self._POPULATION_SIZE = pop_size
         self._CHROMOSOME_LENGTH = chrom_len
@@ -32,10 +32,10 @@ class GeneticAlgorithm(object):
         """
         This function is in charge of initializing the first generation with randomly generated chromosomes.
         When creating application specific child classes, this function should be overridden.
-        :param pop_size:
-        :param chrom_len:
-        :param g_size:
-        :return:
+        :param pop_size: size of the entire population.
+        :param chrom_len: how many genes are in a chromosome.
+        :param g_size: how many possibilities are held within each gene.
+        :return: none.
         """
         for i in range(pop_size):
             temp_gene = []
@@ -63,6 +63,11 @@ class GeneticAlgorithm(object):
         self.population = self.population.reset_index(drop=True)
 
     def evolve(self, gen=1):
+        """
+        This function will evolve the entire population to the specified number of generations.
+        :param gen: how many generations will the genetic algorithm evolve.
+        :return:
+        """
         self._FINAL_GENERATION = gen
         for i in range(gen):
             self._mate()
