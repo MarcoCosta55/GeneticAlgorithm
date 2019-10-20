@@ -7,4 +7,4 @@ class StringGA(GeneticAlgorithm):
 
         self._ascii_dict = {i: chr(i) for i in range(129)}
 
-        GeneticAlgorithm.__init__(self, pop_size=200, chrom_len=len(sample_string), g_size=len(self._ascii_dict))
+        GeneticAlgorithm.__init__(self, pop_size=100, chrom_len=len(sample_string), g_size=len(self._ascii_dict))
