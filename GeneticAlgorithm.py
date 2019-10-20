@@ -60,6 +60,13 @@ class GeneticAlgorithm(object):
         for i in range(self._POPULATION_SIZE):
             self.population['fitness'][i] = sum(self.population['chromosome'][i])
 
+        self._sort_population()
+
+    def _sort_population(self):
+        """
+        Sorts the population according to fitness in descending order.
+        :return:
+        """
         self.population = self.population.sort_values('fitness', ascending=False)
         self.population = self.population.reset_index(drop=True)
 
