@@ -79,7 +79,6 @@ class GeneticAlgorithm(object):
         self._FINAL_GENERATION = gen
         for i in range(gen):
             self._mate()
-            self._fitness()
 
     def _mating_pool(self):
         """
@@ -100,7 +99,8 @@ class GeneticAlgorithm(object):
         """
         self._mating_pool()
         self._crossover()
-        self._mutate()
+        self._mutate(5)
+        self._fitness()
 
     def _crossover(self):
         """
@@ -117,13 +117,17 @@ class GeneticAlgorithm(object):
             self.population['chromosome'][i+1] = temp_chrom2
             i += 2
 
-    def _mutate(self):
+    def _mutate(self, mutation_chance):
         """
-        Not yet implemented. A random gene from a random chromosome is mutated once per generation. The chromosome's
-        fitness and place in the population is reevaluated.
-        :return: none. This function will directly modify the population class variable.
+        If a mutation occurs, one randomly chosen gene inside one randomly chosen chromosome will be replaced with
+        a randomly generated gene.
+        :param mutation_chance: the number passed here represents the percentage chance of a mutation 0-100
+        :return: none.
         """
-        pass
+        if mutation_chance >= randrange(100):
+            self.population['chromosome'][randrange(self._POPULATION_SIZE)][randrange(self._CHROMOSOME_LENGTH)] = \
+                randrange(self._GENE_SIZE)
+
 
 # The following functions are just simple getters for class variables.
     def get_pop_size(self):
