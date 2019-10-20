@@ -99,7 +99,8 @@ class GeneticAlgorithm(object):
         """
         self._mating_pool()
         self._crossover()
-        self._mutate(5)
+        # The number passed in the mutate function represents the percent chance of a mutation occurring.
+        self._mutate(50)
         self._fitness()
 
     def _crossover(self):
