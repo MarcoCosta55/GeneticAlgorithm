@@ -89,6 +89,7 @@ class GeneticAlgorithm(object):
         for i in range(gen):
             self._mate()
 
+        self._sort_population()
     def _mating_pool(self):
         """
         The purpose of this function is to create a temporary dataframe where a mating pool is chosen from the existing
