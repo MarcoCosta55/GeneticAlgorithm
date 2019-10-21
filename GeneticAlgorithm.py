@@ -18,15 +18,19 @@ class GeneticAlgorithm(object):
         :param chrom_len: how many genes are in a chromosome. (eg strand of DNA)
         :param g_size: how many possibilities are held within each gene. Value is n-1  (eg. for human DNA this number would be 3)
         """
+
+        # Initializing class variables and constants.
         self._POPULATION_SIZE = pop_size
         self._CHROMOSOME_LENGTH = chrom_len
         self._GENE_SIZE = g_size
         self._FINAL_GENERATION = 1
+        self._mating_population = pd.DataFrame(columns=['chromosome', 'fitness'], index=range(0, pop_size))
+        self.population = pd.DataFrame(columns=['chromosome', 'fitness'], index=range(0, pop_size))
 
-        # initializing our class variable 'population' to be a DataFrame of randomly generated chromosomes
-        # and NaN fitness values.
-        self.population = pd.DataFrame(columns=['chromosome', 'fitness'], index=range(0,pop_size))
+        # Initialize Generation 0 population.
         self._init_pop(pop_size, chrom_len, g_size)
+
+
 
     def _init_pop(self, pop_size, chrom_len, g_size):
         """
@@ -37,11 +41,13 @@ class GeneticAlgorithm(object):
         :param g_size: how many possibilities are held within each gene.
         :return: none.
         """
+
         for i in range(pop_size):
             temp_gene = []
             for c in range(chrom_len):
                 temp_gene.append(randrange(g_size))
             self.population['chromosome'][i] = temp_gene
+
         self._fitness()
 
     def __str__(self):
@@ -49,6 +55,7 @@ class GeneticAlgorithm(object):
         Makes it possible to print the entire GeneticAlgorithm object.
         :return: the entire population DataFrame cast as a string
         """
+
         return str(self.population)
 
     def _fitness(self):
@@ -57,16 +64,17 @@ class GeneticAlgorithm(object):
         This function is designed to be overridden by child classes as it's main use is just to test and make sure the
         other functions of the class function as expected.
         """
+
         for i in range(self._POPULATION_SIZE):
             self.population['fitness'][i] = sum(self.population['chromosome'][i])
 
-        self._sort_population()
 
     def _sort_population(self):
         """
         Sorts the population according to fitness in descending order.
         :return:
         """
+
         self.population = self.population.sort_values('fitness', ascending=False)
         self.population = self.population.reset_index(drop=True)
 
@@ -76,6 +84,7 @@ class GeneticAlgorithm(object):
         :param gen: how many generations will the genetic algorithm evolve.
         :return: none.
         """
+
         self._FINAL_GENERATION = gen
         for i in range(gen):
             self._mate()
@@ -88,7 +97,23 @@ class GeneticAlgorithm(object):
         mate in order to make n+1 generation.
         :return: none.
         """
-        pass
+
+        max_fitness = self.population['fitness'][0]
+        mate_i = 0
+        pop_i = 0
+        while mate_i < self._POPULATION_SIZE:
+            if self.population['fitness'][pop_i] >= randrange(max_fitness):
+                self._mating_population['chromosome'][mate_i] = self.population['chromosome'][pop_i]
+                self._mating_population['fitness'][mate_i] = self.population['fitness'][pop_i]
+                pop_i += 1
+                mate_i += 1
+            else:
+                pop_i += 1
+
+            if pop_i == self._POPULATION_SIZE:
+                pop_i = 0
+
+        self.population = self._mating_population
 
     def _mate(self):
         """
@@ -98,6 +123,7 @@ class GeneticAlgorithm(object):
         :return: none.
         """
         self._mating_pool()
+        self._sort_population()
         self._crossover()
         # The number passed in the mutate function represents the percent chance of a mutation occurring.
         self._mutate(50)
