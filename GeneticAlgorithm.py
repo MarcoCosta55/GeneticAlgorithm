@@ -139,8 +139,10 @@ class GeneticAlgorithm(object):
         i = 0
         while i < self._POPULATION_SIZE:
             cross_pos = randrange(self._CHROMOSOME_LENGTH)
-            temp_chrom1 = self.population['chromosome'][i][cross_pos:] + self.population['chromosome'][i+1][:cross_pos]
-            temp_chrom2 = self.population['chromosome'][i+1][cross_pos:] + self.population['chromosome'][i][:cross_pos]
+            temp_chrom1 = self.population['chromosome'][i][cross_pos:] + \
+                          self.population['chromosome'][i+1][:cross_pos]
+            temp_chrom2 = self.population['chromosome'][i+1][cross_pos:] + \
+                          self.population['chromosome'][i][:cross_pos]
             self.population['chromosome'][i] = temp_chrom1
             self.population['chromosome'][i+1] = temp_chrom2
             i += 2
