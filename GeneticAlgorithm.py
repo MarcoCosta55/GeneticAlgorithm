@@ -92,10 +92,9 @@ class GeneticAlgorithm(object):
 
     def _mating_pool(self):
         """
-        The purpose of this function is to create a temporary dataframe where a mating pool is chosen from the existing
+        The purpose of this function is to populate the mating_population class variable from the existing
         population using a version of natural selection that weighs the chance of being selected based on the
-        chromosomes fitness value. This function is not yet implemented. As it stands now, all members of n population
-        mate in order to make n+1 generation.
+        chromosomes' fitness value.
         :return: none.
         """
 
@@ -133,7 +132,7 @@ class GeneticAlgorithm(object):
     def _crossover(self):
         """
         Neighboring chromosomes are chosen to mate. A random spot in the chromosomes is chosen and then the chromosomes
-        exchange DNA at that break point. The resulting two chromosomes are the children for the next generation.
+        exchange DNA at that break point. The resulting two chromosomes are the population the next generation.
         :return: none. The population dataframe is directly modified.
         """
         i = 0
