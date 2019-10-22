@@ -68,7 +68,6 @@ class GeneticAlgorithm(object):
         for i in range(self._POPULATION_SIZE):
             self.population['fitness'][i] = sum(self.population['chromosome'][i])
 
-
     def _sort_population(self):
         """
         Sorts the population according to fitness in descending order.
