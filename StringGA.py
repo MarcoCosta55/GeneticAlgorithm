@@ -2,7 +2,7 @@
 NOT YET IMPLEMENTED
 This class will extend the GeneticAlgorithm class. Main functions will be to test a simple implementation of the base
 GeneticAlgorithm class and debug it. The class will evolve a set of random strings to approximate as closely as possible
-a given "perfect" string.
+a given string. This is mostly to test the base algorithm for bugs or inefficient base code.
 """
 
 from GeneticAlgorithm import GeneticAlgorithm
