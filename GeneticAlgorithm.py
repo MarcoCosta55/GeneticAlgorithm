@@ -89,6 +89,7 @@ class GeneticAlgorithm(object):
             self._mate()
 
         self._sort_population()
+
     def _mating_pool(self):
         """
         The purpose of this function is to create a temporary dataframe where a mating pool is chosen from the existing
@@ -157,8 +158,8 @@ class GeneticAlgorithm(object):
             self.population['chromosome'][randrange(self._POPULATION_SIZE)][randrange(self._CHROMOSOME_LENGTH)] = \
                 randrange(self._GENE_SIZE)
 
-
 # The following functions are just simple getters for class variables.
+
     def get_pop_size(self):
         return self._POPULATION_SIZE
 
