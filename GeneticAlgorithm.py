@@ -33,7 +33,6 @@ class GeneticAlgorithm(object):
     def _init_pop(self):
         """
         This function is in charge of initializing the first generation with randomly generated chromosomes.
-        When creating application specific child classes, this function should be overridden.
         :return: none.
         """
 
@@ -121,8 +120,8 @@ class GeneticAlgorithm(object):
 
     def _mate(self):
         """
-        This function just calls the functions necessary to evolve each generation. As added functionality is added
-        to the GA's evolution process, this function can added to. Also, child classes can easily override this function
+        This function calls the functions necessary to evolve each generation. If added functions are created
+        for the GA's evolution process, they can be added here. Also, child classes can easily override this function
         if they add functionality to the evolutionary process.
         :return: none.
         """
