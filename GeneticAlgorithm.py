@@ -28,27 +28,31 @@ class GeneticAlgorithm(object):
         self.population = pd.DataFrame(columns=['chromosome', 'fitness'], index=range(0, pop_size))
 
         # Initialize Generation 0 population.
-        self._init_pop(pop_size, chrom_len, g_size)
+        self._init_pop()
 
-
-
-    def _init_pop(self, pop_size, chrom_len, g_size):
+    def _init_pop(self):
         """
         This function is in charge of initializing the first generation with randomly generated chromosomes.
         When creating application specific child classes, this function should be overridden.
-        :param pop_size: size of the entire population.
-        :param chrom_len: how many genes are in a chromosome.
-        :param g_size: how many possibilities are held within each gene.
         :return: none.
         """
 
-        for i in range(pop_size):
-            temp_gene = []
-            for c in range(chrom_len):
-                temp_gene.append(randrange(g_size))
-            self.population['chromosome'][i] = temp_gene
+        for i in range(self._POPULATION_SIZE):
+            self.population['chromosome'][i] = self._init_chromosome()
 
         self._fitness()
+
+    def _init_chromosome(self):
+        """
+        This function appends randomly generated genes to a single chromosome and then returns that chromosome.
+        :return: temp_chrom (list type object)
+        """
+
+        temp_chrom = []
+        for c in range(self._CHROMOSOME_LENGTH):
+            temp_chrom.append(randrange(self._GENE_SIZE))
+
+        return temp_chrom
 
     def __str__(self):
         """
