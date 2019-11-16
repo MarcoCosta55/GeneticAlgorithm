@@ -11,9 +11,6 @@ class MusicGA(GeneticAlgorithm):
 
     def __init__(self, pop_size=10, chrom_len=10):
 
-        # G_SIZE directly relates to the _NOTE_DICT size and should not be changed.
-        GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size=45)
-
         # This dictionary provides the basic decoding mechanism for each gene. Each gene that is generated corresponds
         # to a key in the dictionary that references a tuple. The tuple will provide a more verbose definition of the
         # melody. It is encoded as follows: ('Note', int rep. of note, int rep of note length). The int representation
@@ -28,5 +25,27 @@ class MusicGA(GeneticAlgorithm):
                            35: ('G', 7, 1), 36: ('G', 7, 2), 37: ('G', 7, 4), 38: ('G', 7, 8), 39: ('G', 7, 16),
                            40: ('G#', 8, 1), 41: ('G#', 8, 2), 42: ('G#', 8, 4), 43: ('G#', 8, 8), 44: ('G#', 8, 16)}
 
+        # G_SIZE directly relates to the _NOTE_DICT size and should not be changed unless the note dictionary changes.
+        GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size=45)
+
     def _fitness(self):
-        pass
+        for i in range(self._POPULATION_SIZE):
+            jump_fitness = self._jump_fitness(self._NOTE_DICT[i])
+            self.population['fitness'][i] = jump_fitness
+
+    def _jump_fitness(self, curr_chrom):
+        jump_total = 0
+        i = 0
+
+        while i < self._GENE_SIZE - 1:
+            if abs(self._NOTE_DICT[curr_chrom][1] - self._NOTE_DICT[curr_chrom + 1][1]) <= 1:
+                jump_total += 5
+            elif abs(self._NOTE_DICT[curr_chrom][1] - self._NOTE_DICT[curr_chrom + 1][1]) <= 2:
+                jump_total += 10
+            elif abs(self._NOTE_DICT[curr_chrom][1] - self._NOTE_DICT[curr_chrom + 1][1]) <= 3:
+                jump_total += 5
+            else:
+                jump_total += 0
+            i += 1
+
+        return jump_total
