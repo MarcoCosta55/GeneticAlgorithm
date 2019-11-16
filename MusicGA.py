@@ -9,8 +9,8 @@ from GeneticAlgorithm import GeneticAlgorithm
 
 class MusicGA(GeneticAlgorithm):
 
-    def __init__(self, pop_size=10, chrom_len=10, g_size=11):
-        GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size)
+    def __init__(self, pop_size=10, chrom_len=10):
+        GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size=45)
 
         # This dictionary provides the basic decoding mechanism for each gene. Each gene that is generated corresponds
         # to a key in the dictionary that references a tuple. The tuple will provide a more verbose definition of the
