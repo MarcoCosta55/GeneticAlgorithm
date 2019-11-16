@@ -10,6 +10,8 @@ from GeneticAlgorithm import GeneticAlgorithm
 class MusicGA(GeneticAlgorithm):
 
     def __init__(self, pop_size=10, chrom_len=10):
+
+        # G_SIZE directly relates to the _NOTE_DICT size and should not be changed.
         GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size=45)
 
         # This dictionary provides the basic decoding mechanism for each gene. Each gene that is generated corresponds
