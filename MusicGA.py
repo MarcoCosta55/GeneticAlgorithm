@@ -28,5 +28,5 @@ class MusicGA(GeneticAlgorithm):
                            35: ('G', 7, 1), 36: ('G', 7, 2), 37: ('G', 7, 4), 38: ('G', 7, 8), 39: ('G', 7, 16),
                            40: ('G#', 8, 1), 41: ('G#', 8, 2), 42: ('G#', 8, 4), 43: ('G#', 8, 8), 44: ('G#', 8, 16)}
 
-    def fitness(self):
+    def _fitness(self):
         pass
