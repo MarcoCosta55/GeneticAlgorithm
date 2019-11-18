@@ -1,5 +1,5 @@
 """
-NOT YET IMPLEMENTED
+JUST STARTING IMPLEMENTATION
 This class will extend the GeneticAlgorithm class. Main functions will be override how the chromosomes are encoded and
 create a fitness function that tests the chromosome when compared to classical baroque melodic rules.
 """
