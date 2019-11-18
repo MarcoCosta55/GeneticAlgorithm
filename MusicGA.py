@@ -9,7 +9,7 @@ from GeneticAlgorithm import GeneticAlgorithm
 
 class MusicGA(GeneticAlgorithm):
 
-    def __init__(self, pop_size=10, chrom_len=10, g_size=45):
+    def __init__(self, pop_size=10, chrom_len=10):
 
         # This dictionary provides the basic decoding mechanism for each gene. Each gene that is generated corresponds
         # to a key in the dictionary that references a tuple. The tuple will provide a more verbose definition of the
@@ -26,7 +26,7 @@ class MusicGA(GeneticAlgorithm):
                            40: ('G#', 8, 1), 41: ('G#', 8, 2), 42: ('G#', 8, 4), 43: ('G#', 8, 8), 44: ('G#', 8, 16)}
 
         # G_SIZE directly relates to the _NOTE_DICT size and should not be changed unless the note dictionary changes.
-        GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size)
+        GeneticAlgorithm.__init__(self, pop_size, chrom_len, g_size=45)
 
     def __str__(self) -> 'string':
         """
