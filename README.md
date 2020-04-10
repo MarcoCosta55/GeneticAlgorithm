@@ -3,7 +3,7 @@ Copyright 2019 by Marco Costa
 
 You are free to use my code however you want. Have at!
 
-This is a Work In Progress and mostly made to help students understand how the base components of a Genetic Algorithm work outside of the fitness function.
+This is a Work In Progress and mostly made to help students understand how the base components of a Genetic Algorithm work aside from the fitness function.
 
 This project is composed of two classes:
 
